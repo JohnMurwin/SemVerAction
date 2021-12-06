@@ -1,0 +1,18 @@
+#  SemVer Tagging & Release System
+#   Uses:
+#   From: John Murwin, Timothy Yolt
+
+name: SemVer
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  SemVer:
+    name: Calculate & Apply SemVer Number
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test Output
+        run: |
+          echo "hello world"
