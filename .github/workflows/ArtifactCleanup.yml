@@ -1,0 +1,18 @@
+#   General Artifact Cleanup
+#   Uses: kopav/purge-artifacts-action@v1
+#   From: 
+
+
+name: Delete Old Artifacts
+on:
+  schedule:
+    - cron: '30 10 * * *' # every day at 10:30
+
+jobs:
+  delete-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: kolpav/purge-artifacts-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          expire-in: 30 days
