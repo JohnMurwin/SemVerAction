@@ -1,0 +1,14 @@
+#  SemVer Tagging & Release System
+#   Uses:
+#   From: John Murwin, Timothy Yolt
+
+name: SemVer
+on:
+  workflow_dispatch:
+
+jobs:
+  SemVer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        run: echo "hello world"
