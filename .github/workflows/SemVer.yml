@@ -3,12 +3,16 @@
 #   From: John Murwin, Timothy Yolt
 
 name: SemVer
+
 on:
   workflow_dispatch: {}
 
 jobs:
   SemVer:
+    name: Calculate & Apply SemVer Number
     runs-on: ubuntu-latest
+
     steps:
-      - name: Test
-        run: echo "hello world"
+      - name: Test Output
+        run: |
+          echo "hello world"
