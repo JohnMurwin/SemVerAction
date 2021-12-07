@@ -37,6 +37,10 @@ if [ "$GITHUB_REF_NAME" == "dev" ]; then
   export CURRENT_VERSION
 fi
 
+# main commit
+if [ "$GITHUB_REF_NAME" == "main" ]; then
+  echo "main commit & tag has happened"
+fi
 
   # X. Update VERSION_FILE
 
