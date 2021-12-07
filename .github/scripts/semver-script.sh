@@ -31,10 +31,12 @@ CURRENT_VERSION="$BREAKING_VERSION.$RELEASE_VERSION.$FEATURE_VERSION"
 
 # 4. Calculate SemVer bumps based on branch names
 
-# dev commit
+# 4a dev commit
 if [ "$GITHUB_REF_NAME" == "dev" ]; then
-  echo "dev commit & tag has happened"
-  export CURRENT_VERSION
+  git tag "$CURRENT_VERSION-dev"
+  git push origin "$CURRENT_VERSION-dev"
+
+  ((FEATURE_VERSION++))
 fi
 
 # main commit
