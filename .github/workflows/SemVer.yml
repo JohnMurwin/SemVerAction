@@ -20,13 +20,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Print Working Directory
-        run: |
-          pwd
-
       - name: Calculate SemVer
-        run: sh .github/workflows/semver-script.sh
-
-      - name: Output SemVer
         run: |
-          echo ${{ env.VERSION }}
+          source .github/workflows/semver-script.sh
+          echo "SEMVER=$VERSION" >> $GITHUB_ENV
+
+      - name: Test Use of SemVer Output from Shell
+        run: |
+          echo "${{ env.SEMVER }}"
