@@ -6,7 +6,7 @@ name: SemVer
 
 on:
   push:
-    branches: {main, dev}
+    branches: [main, dev]
 
 jobs:
   SemVer:
