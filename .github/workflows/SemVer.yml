@@ -23,7 +23,7 @@ jobs:
 
       - name: Calculate SemVer
         run: |
-          source .github/scripts/semver-script.sh 2>&1
+          source .github/scripts/semver-script.sh
           echo "SEMVER=$CURRENT_VERSION" >> $GITHUB_ENV
 
       - name: Test Use of SemVer Output from Shell
