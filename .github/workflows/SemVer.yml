@@ -13,6 +13,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test Output
+
+      # Next checkout the project @ fetch-depth 0 for full history and LFS support
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Print Working Directory
         run: |
-          echo "hello world"
+          pwd
+
+      - name: Calculate SemVer
+        run: sh .github/workflows/semver-script.sh
+
+      - name: Output SemVer
+        run: |
+          echo ${{ env.VERSION }}
