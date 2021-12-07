@@ -54,18 +54,15 @@ if [ "$GITHUB_REF_NAME" == "main" ]; then
   git tag "v$CURRENT_VERSION"
   git push origin "v$CURRENT_VERSION"
 
-  echo "this is the main commit section"
-
-  # bump to version for next upcoming release & set feature to 0
+  # bump to version for next upcoming release
   if [ "$RELEASE_VERSION" == 0 ]; then
     RELEASE_VERSION=1
   else
     ((RELEASE_VERSION++))
   fi
 
+  # & set feature to 0
   FEATURE_VERSION=0
-  echo "Release version: $RELEASE_VERSION"
-  echo "Feature version: $FEATURE_VERSION"
 fi
 
 # 5. Version number increments only happen on dev branch
