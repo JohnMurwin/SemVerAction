@@ -41,7 +41,11 @@ if [ "$GITHUB_REF_NAME" == "dev" ]; then
   git push origin "v$CURRENT_VERSION-dev"
 
   # bump to version for next upcoming feature
-  ((FEATURE_VERSION++))
+  if [ "$FEATURE_VERSION" == 0 ]; then
+    FEATURE_VERSION=1
+  else
+    ((FEATURE_VERSION++))
+  fi
 fi
 
 # 4b. main commit condition
@@ -53,7 +57,12 @@ if [ "$GITHUB_REF_NAME" == "main" ]; then
   echo "this is the main commit section"
 
   # bump to version for next upcoming release & set feature to 0
-  ((RELEASE_VERSION++))
+  if [ "$RELEASE_VERSION" == 0]; then
+    RELEASE_VERSION=1
+  else
+    ((RELEASE_VERSION++))
+  fi
+
   FEATURE_VERSION=0
   echo "Release version: $RELEASE_VERSION"
   echo "Feature version: $FEATURE_VERSION"
