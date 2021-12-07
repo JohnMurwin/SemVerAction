@@ -28,7 +28,13 @@ CURRENT_VERSION="$BREAKING_VERSION.$RELEASE_VERSION.$FEATURE_VERSION"
 
 # 3. IF NECCESSARY, Grab last tag_commit_sha for comparison check before verBump
 
-export CURRENT_VERSION
+
+# 4. Calculate SemVer bumps based on branch names
+
+# dev commit
+if [ "$GITHUB_REF_NAME" == "dev" ]; then
+  export CURRENT_VERSION
+fi
 
 
   # X. Update VERSION_FILE
