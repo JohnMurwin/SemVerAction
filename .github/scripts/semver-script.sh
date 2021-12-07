@@ -33,6 +33,7 @@ CURRENT_VERSION="$BREAKING_VERSION.$RELEASE_VERSION.$FEATURE_VERSION"
 
 # dev commit
 if [ "$GITHUB_REF_NAME" == "dev" ]; then
+  echo "dev commit & tag has happened"
   export CURRENT_VERSION
 fi
 
