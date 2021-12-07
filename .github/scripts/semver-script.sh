@@ -63,7 +63,7 @@ sed -i "s/\(MINOR_VERSION=\).*\$/\1${MINOR_VERSION}/" $VERSION_FILE
 # sed -i "s/\(projectVersion=\).*\$/\1${NEW_VERSION}/" $SONAR_FILE
 
 # 8. Set new version for dev update
-NEW_VERSION="$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION"
+NEW_VERSION="$BREAKING_VERSION.$RELEASE_VERSION.$FEATURE_VERSION"
 
 git add "$VERSION_FILE"
 git commit -m "[ci skip] Automated Commit: CI Build Number Increment $CURRENT_VERSION -> $NEW_VERSION"
