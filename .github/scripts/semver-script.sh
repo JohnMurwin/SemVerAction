@@ -33,7 +33,6 @@ CURRENT_VERSION="$BREAKING_VERSION.$RELEASE_VERSION.$FEATURE_VERSION"
 
 # 3. IF NECESSARY, Grab last tag_commit_sha for comparison check before verBump
 
-
 # 4. Calculate SemVer bumps based on branch names
 # 4a. dev commit condition
 if [ "$GITHUB_REF_NAME" == "dev" ]; then
