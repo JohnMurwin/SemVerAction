@@ -23,25 +23,55 @@ else
   exit 1
 fi
 
+# 1b. swap to Automation account
+git config user.email "ciautomation@fathom7.com"
+git config user.name "F7-CIAutomation"
+
 # 2. Store combination of values from VERSION_FILE into CURRENT_VERSION
 CURRENT_VERSION="$BREAKING_VERSION.$RELEASE_VERSION.$FEATURE_VERSION"
 
-# 3. IF NECCESSARY, Grab last tag_commit_sha for comparison check before verBump
+# 3. IF NECESSARY, Grab last tag_commit_sha for comparison check before verBump
 
 
 # 4. Calculate SemVer bumps based on branch names
-
-# dev commit
+# 4a. dev commit condition
 if [ "$GITHUB_REF_NAME" == "dev" ]; then
-  echo "dev commit & tag has happened"
-  export CURRENT_VERSION
+  # create tag and push
+  git tag "$CURRENT_VERSION-dev"
+  git push origin "$CURRENT_VERSION-dev"
+
+  # bump to version for next upcoming feature
+  ((FEATURE_VERSION++))
 fi
 
-# main commit
+# 4b. main commit condition
 if [ "$GITHUB_REF_NAME" == "main" ]; then
-  echo "main commit & tag has happened"
+  # create tag and push
+  git tag "$CURRENT_VERSION"
+  git push origin "$CURRENT_VERSION"
+
+  # bump to version for next upcoming release & set feature to 0
+  ((RELEASE_VERSION++))
+  FEATURE_VERSION=0
 fi
 
-  # X. Update VERSION_FILE
+# 5. Version number increments only happen on dev branch
+git checkout dev
+git pull
 
-  # X. Update SONAR_FILE
+# 6. Update version.txt file
+sed -i "s/\(FEATURE_VERSION=\).*\$/\1${FEATURE_VERSION}/" $VERSION_FILE
+sed -i "s/\(RELEASE_VERSION=\).*\$/\1${RELEASE_VERSION}/" $VERSION_FILE
+
+# 7. Update sonar-project.properties file
+# sed -i "s/\(projectVersion=\).*\$/\1${NEW_VERSION}/" $SONAR_FILE
+
+# 8. Set new version for dev update
+NEW_VERSION="$BREAKING_VERSION.$RELEASE_VERSION.$FEATURE_VERSION"
+
+git add "$VERSION_FILE"
+git commit -m "[ci skip] Automated Commit: CI Build Number Increment $CURRENT_VERSION -> $NEW_VERSION"
+git push origin dev
+
+# X. Export CURRENT_VERSION for use in Github Actions
+export CURRENT_VERSION
