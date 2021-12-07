@@ -52,7 +52,7 @@ if [ "$GITHUB_REF_NAME" == "main" ]; then
 
   # bump to version for next upcoming release & set feature to 0
   ((RELEASE_VERSION++))
-  PATCH_VERSION=0
+  FEATURE_VERSION=0
 fi
 
 # 5. Version number increments only happen on dev branch
@@ -60,8 +60,8 @@ git checkout dev
 git pull
 
 # 6. Update version.txt file
-sed -i "s/\(PATCH_VERSION=\).*\$/\1${PATCH_VERSION}/" $VERSION_FILE
-sed -i "s/\(MINOR_VERSION=\).*\$/\1${MINOR_VERSION}/" $VERSION_FILE
+sed -i "s/\(FEATURE_VERSION=\).*\$/\1${FEATURE_VERSION}/" $VERSION_FILE
+sed -i "s/\(RELEASE_VERSION=\).*\$/\1${RELEASE_VERSION}/" $VERSION_FILE
 
 # 7. Update sonar-project.properties file
 # sed -i "s/\(projectVersion=\).*\$/\1${NEW_VERSION}/" $SONAR_FILE
