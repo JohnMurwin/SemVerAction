@@ -10,6 +10,7 @@
 VERSION_FILE="./.github/version.txt"
 SONAR_FILE=""
 
+
 if [ "$GITHUB_REF_NAME" == "" ]; then
   echo "Unknown Github branch name, is the SemVer.yml Workflow setup correctly?"
   exit 1
@@ -37,8 +38,8 @@ CURRENT_VERSION="$BREAKING_VERSION.$RELEASE_VERSION.$FEATURE_VERSION"
 # 4a. dev commit condition
 if [ "$GITHUB_REF_NAME" == "dev" ]; then
   # create tag and push
-  git tag "$CURRENT_VERSION-dev"
-  git push origin "$CURRENT_VERSION-dev"
+  git tag "v$CURRENT_VERSION-dev"
+  git push origin "v$CURRENT_VERSION-dev"
 
   # bump to version for next upcoming feature
   ((FEATURE_VERSION++))
@@ -47,8 +48,8 @@ fi
 # 4b. main commit condition
 if [ "$GITHUB_REF_NAME" == "main" ]; then
   # create tag and push
-  git tag "$CURRENT_VERSION"
-  git push origin "$CURRENT_VERSION"
+  git tag "v$CURRENT_VERSION"
+  git push origin "v$CURRENT_VERSION"
 
   # bump to version for next upcoming release & set feature to 0
   ((RELEASE_VERSION++))
@@ -70,7 +71,7 @@ sed -i "s/\(RELEASE_VERSION=\).*\$/\1${RELEASE_VERSION}/" $VERSION_FILE
 NEW_VERSION="$BREAKING_VERSION.$RELEASE_VERSION.$FEATURE_VERSION"
 
 git add "$VERSION_FILE"
-git commit -m "[ci skip] Automated Commit: CI Build Number Increment $CURRENT_VERSION -> $NEW_VERSION"
+git commit -m "[ci skip] Automated Commit: CI Build Number Increment v$CURRENT_VERSION -> v$NEW_VERSION"
 git push origin dev
 
 # X. Export CURRENT_VERSION for use in Github Actions
