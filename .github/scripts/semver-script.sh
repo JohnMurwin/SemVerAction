@@ -57,7 +57,7 @@ if [ "$GITHUB_REF_NAME" == "main" ]; then
   echo "this is the main commit section"
 
   # bump to version for next upcoming release & set feature to 0
-  if [ "$RELEASE_VERSION" == 0]; then
+  if [ "$RELEASE_VERSION" == 0 ]; then
     RELEASE_VERSION=1
   else
     ((RELEASE_VERSION++))
