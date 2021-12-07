@@ -10,7 +10,7 @@
 VERSION_FILE="./.github/version.txt"
 SONAR_FILE=""
 
-
+# 0. Check for if the branch name even exists
 if [ "$GITHUB_REF_NAME" == "" ]; then
   echo "Unknown Github branch name, is the SemVer.yml Workflow setup correctly?"
   exit 1
