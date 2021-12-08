@@ -10,6 +10,8 @@
 VERSION_FILE="./.github/version.txt"
 SONAR_FILE=""
 
+echo "$ACCESS_TOKEN"
+
 # 0. Check for if the branch name even exists
 if [ "$GITHUB_REF_NAME" == "" ]; then
   echo "Unknown Github branch name, is the SemVer.yml Workflow setup correctly?"
@@ -27,6 +29,8 @@ fi
 # 1b. swap to Automation account
 git config user.email "projadmin@fathom7.com"
 git config user.name "F7-CIAutomation"
+
+git remote add origin https://"$ACCESS_TOKEN"/JohnMurwin/SemVerAction
 
 # 2. Store combination of values from VERSION_FILE into CURRENT_VERSION
 CURRENT_VERSION="$BREAKING_VERSION.$RELEASE_VERSION.$FEATURE_VERSION"
