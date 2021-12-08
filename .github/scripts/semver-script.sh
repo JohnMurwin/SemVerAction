@@ -10,8 +10,6 @@
 VERSION_FILE="./.github/version.txt"
 SONAR_FILE=""
 
-echo "$ACCESS_TOKEN"
-
 # 0. Check for if the branch name even exists
 if [ "$GITHUB_REF_NAME" == "" ]; then
   echo "Unknown Github branch name, is the SemVer.yml Workflow setup correctly?"
@@ -83,7 +81,6 @@ NEW_VERSION="$BREAKING_VERSION.$RELEASE_VERSION.$FEATURE_VERSION"
 
 git add "$VERSION_FILE"
 git commit -m "[ci skip] Automated Commit: CI Build Number Increment v$CURRENT_VERSION -> v$NEW_VERSION"
-git push https://F7-CIAutomation:$ACCESS_TOKEN@github.com/JohnMurwin/SemVerAction.git origin dev --force
-
+git push https://$ACCESS_TOKEN@github.com/JohnMurwin/SemVerAction.git dev
 # X. Export CURRENT_VERSION for use in Github Actions
 export CURRENT_VERSION
