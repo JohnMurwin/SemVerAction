@@ -22,11 +22,11 @@ jobs:
           fetch-depth: 0
 
       - name: Calculate SemVer
-        with:
-          GITHUB_TOKEN: ${{ secrets.F7CI_PAT }}
         run: |
           source .github/scripts/semver-script.sh
           echo "SEMVER=$CURRENT_VERSION" >> $GITHUB_ENV
+        with:
+          GITHUB_TOKEN: ${{ secrets.F7CI_PAT }}
 
       - name: Test Use of SemVer Output from Shell
         run: |
