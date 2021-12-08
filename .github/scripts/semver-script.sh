@@ -25,7 +25,7 @@ else
 fi
 
 # 1b. swap to Automation account
-git config user.email "ciautomation@fathom7.com"
+git config user.email "projadmin@fathom7.com"
 git config user.name "F7-CIAutomation"
 
 # 2. Store combination of values from VERSION_FILE into CURRENT_VERSION
@@ -81,7 +81,7 @@ NEW_VERSION="$BREAKING_VERSION.$RELEASE_VERSION.$FEATURE_VERSION"
 
 git add "$VERSION_FILE"
 git commit -m "[ci skip] Automated Commit: CI Build Number Increment v$CURRENT_VERSION -> v$NEW_VERSION"
-git push origin dev
+git push origin dev --force
 
 # X. Export CURRENT_VERSION for use in Github Actions
 export CURRENT_VERSION
