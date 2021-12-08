@@ -31,7 +31,7 @@ git config user.email "projadmin@fathom7.com"
 git config user.name "F7-CIAutomation"
 
 git remote remove origin
-git remote add origin https://"$ACCESS_TOKEN"/JohnMurwin/SemVerAction
+git remote add origin https://"$ACCESS_TOKEN"@github.com/JohnMurwin/SemVerAction
 
 # 2. Store combination of values from VERSION_FILE into CURRENT_VERSION
 CURRENT_VERSION="$BREAKING_VERSION.$RELEASE_VERSION.$FEATURE_VERSION"
