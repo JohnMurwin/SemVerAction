@@ -30,9 +30,6 @@ fi
 git config user.email "projadmin@fathom7.com"
 git config user.name "F7-CIAutomation"
 
-git remote remove origin
-git remote add origin https://"$ACCESS_TOKEN"@github.com/JohnMurwin/SemVerAction
-
 # 2. Store combination of values from VERSION_FILE into CURRENT_VERSION
 CURRENT_VERSION="$BREAKING_VERSION.$RELEASE_VERSION.$FEATURE_VERSION"
 
@@ -86,7 +83,7 @@ NEW_VERSION="$BREAKING_VERSION.$RELEASE_VERSION.$FEATURE_VERSION"
 
 git add "$VERSION_FILE"
 git commit -m "[ci skip] Automated Commit: CI Build Number Increment v$CURRENT_VERSION -> v$NEW_VERSION"
-git push origin dev --force
+git push https://F7-CIAutomation:$ACCESS_TOKEN@github.com/JohnMurwin/SemVerAction.git origin dev --force
 
 # X. Export CURRENT_VERSION for use in Github Actions
 export CURRENT_VERSION
