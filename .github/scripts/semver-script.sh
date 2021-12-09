@@ -5,6 +5,7 @@
 
 ## Is used to calculate the SemVer number based of current version, and outputs version for use in Github
 ## NOTE: This script should only run on develop or main!
+## UPON INITIALIZATION OF NEW REPO: set version.text to 0.0.1
 
 # REQUIRED files to use to update version information
 VERSION_FILE="./.github/version.txt"
@@ -79,9 +80,10 @@ sed -i "s/\(RELEASE_VERSION=\).*\$/\1${RELEASE_VERSION}/" $VERSION_FILE
 # 8. Set new version for dev update
 NEW_VERSION="$BREAKING_VERSION.$RELEASE_VERSION.$FEATURE_VERSION"
 
+# 9. Push changes to version file to github for future runs
 git add "$VERSION_FILE"
 git commit -m "[ci skip] Automated Commit: CI Build Number Increment v$CURRENT_VERSION -> v$NEW_VERSION"
-git push https://$ACCESS_TOKEN@github.com/$USER_NAME/$REPO_NAME.git dev --force
+git push origin dev --force
 
 # X. Export CURRENT_VERSION for use in Github Actions
 export CURRENT_VERSION

@@ -3,7 +3,6 @@
 #   From: John Murwin, Timothy Yolt
 
 name: SemVer
-
 on:
   push:
     branches: [main, dev]
@@ -15,23 +14,20 @@ jobs:
 
     steps:
 
-      # Next checkout the project @ fetch-depth 0 for full history and LFS support
+      # First checkout the project @ fetch-depth 0 for full history (tagging importance)
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+          token: ${{ secrets.PAT_TOKEN }}  # this makes protected branch work actually work
 
-
+      # Then call semver-script.sh to tag current version, calculate new version, and update version file
       - name: Calculate SemVer
-        env:
-          ACCESS_TOKEN: ${{ secrets.F7CI_PAT }}
-          USER_NAME: Truly-Integrated-Computing
-          REPO_NAME: A-Tailors-Journey
         run: |
           source .github/scripts/semver-script.sh
           echo "SEMVER=$CURRENT_VERSION" >> $GITHUB_ENV
-          
 
+      # Then use the SemVer output for future actions if needed like this
       - name: Test Use of SemVer Output from Shell
         run: |
           echo "${{ env.SEMVER }}"
