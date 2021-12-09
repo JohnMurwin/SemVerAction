@@ -25,6 +25,8 @@ jobs:
       - name: Calculate SemVer
         env:
           ACCESS_TOKEN: ${{ secrets.F7CI_PAT }}
+          USER_NAME: Truly-Integrated-Computing
+          REPO_NAME: A-Tailors-Journey
         run: |
           source .github/scripts/semver-script.sh
           echo "SEMVER=$CURRENT_VERSION" >> $GITHUB_ENV

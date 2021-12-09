@@ -81,7 +81,7 @@ NEW_VERSION="$BREAKING_VERSION.$RELEASE_VERSION.$FEATURE_VERSION"
 
 git add "$VERSION_FILE"
 git commit -m "[ci skip] Automated Commit: CI Build Number Increment v$CURRENT_VERSION -> v$NEW_VERSION"
-git push https://$ACCESS_TOKEN@github.com/JohnMurwin/SemVerAction.git dev --force
+git push https://$ACCESS_TOKEN@github.com/$USER_NAME/$REPO_NAME.git dev --force
 
 # X. Export CURRENT_VERSION for use in Github Actions
 export CURRENT_VERSION
